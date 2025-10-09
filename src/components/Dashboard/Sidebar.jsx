@@ -1,6 +1,4 @@
 import {
-	FiBarChart2,
-	FiPackage,
 	FiPlusCircle,
 	FiShoppingCart,
 	FiStar,
@@ -9,18 +7,24 @@ import {
 } from "react-icons/fi";
 import { Link } from "react-router";
 import useAuthContext from "../../hooks/useAuthContext";
+import { MdOutlineManageAccounts } from "react-icons/md";
 
 const Sidebar = () => {
 	const { user } = useAuthContext();
 
 	const customerMenus = [
+		{ to: "profile", icon: MdOutlineManageAccounts, label: "Account" },
 		{ to: "/dashboard/pets/add", icon: FiPlusCircle, label: "Add Pet" },
-		{ to: "/dashboard/orders", icon: FiShoppingCart, label: "Orders" },
+		{
+			to: "/dashboard/adoption-history",
+			icon: FiShoppingCart,
+			label: "AdoptionHistory",
+		},
 		{ to: "/reviews", icon: FiStar, label: "Reviews" },
 	];
 
 	const adminMenus = [
-		{ to: "/pets", icon: FiPackage, label: "Pets" },
+		{ to: "profile", icon: MdOutlineManageAccounts, label: "Account" },
 		{ to: "/dashboard/pets/add", icon: FiPlusCircle, label: "Add Pet" },
 		{ to: "/categories", icon: FiTag, label: "Categories" },
 		{ to: "/categories/add", icon: FiPlusCircle, label: "Add Category" },

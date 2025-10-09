@@ -34,10 +34,7 @@ const Navbar = ({ sidebarOpen }) => {
 			{/* Desktop menu */}
 			{user && (
 				<div className="hidden lg:flex items-center gap-6">
-					<Link
-						to="/"
-						className="link link-hover font-medium"
-					>
+					<Link to="/" className="link link-hover font-medium">
 						Home
 					</Link>
 					<Link to="/shop" className="link link-hover font-medium">

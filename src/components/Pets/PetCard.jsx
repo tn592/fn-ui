@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import defaultImage from "../../assets/default_product.jpg";
+import defaultImage from "../../assets/default_image.jpg";
 
 const PetCard = ({ pet }) => {
 	return (

@@ -12,6 +12,7 @@ import { Suspense, useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import useAuthContext from "../hooks/useAuthContext";
 import useFetchCategories from "../hooks/useFetchCategories";
+import AdoptButton from "../components/Adoptions/AdoptButton";
 
 const PetDetail = () => {
 	const [pet, setPet] = useState(null);
@@ -135,15 +136,21 @@ const PetDetail = () => {
 					</div>
 
 					<div className="flex flex-wrap gap-4">
-						<button
-							className="btn bg-pink-500 hover:bg-pink-600 text-white border-none rounded-xl shadow-md hover:shadow-lg transition-all"
-							disabled={!pet.availability}
-						>
-							Adopt Now
-						</button>
-						<button className="btn btn-outline border-pink-300 text-pink-600 hover:bg-pink-100 rounded-xl transition-all">
-							Add to Wishlist
-						</button>
+						{pet.availability ? (
+							<AdoptButton
+								petId={pet.id}
+								onAdoptSuccess={() =>
+									setPet({ ...pet, availability: false })
+								}
+							/>
+						) : (
+							<button
+								className="btn btn-outline border-pink-300 text-pink-500 bg-pink-50 hover:bg-pink-100 cursor-default w-full mt-4 rounded-full transition-all"
+								disabled
+							>
+								Adopted
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

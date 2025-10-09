@@ -14,6 +14,8 @@ import Dashboard from "../pages/Dashboard";
 import AddPet from "../pages/AddPet";
 import PetDetail from "../pages/PetDetail";
 import EditPetDetails from "../pages/EditPetDetails";
+import Profile from "../pages/Profile";
+import AdoptionHistory from "../components/Adoptions/AdoptionHistory";
 
 const AppRoutes = () => {
   return (
@@ -42,11 +44,13 @@ const AppRoutes = () => {
         }
       >
         <Route index element={<Dashboard />} />
+        <Route path="profile" element={<Profile />} />
         <Route path="pets/add" element={<AddPet />} />
         <Route
           path="shop/:petId/edit-pet-details"
           element={<EditPetDetails />}
         />
+        <Route path="adoption-history" element={<AdoptionHistory />} />
       </Route>
     </Routes>
   );

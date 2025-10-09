@@ -66,7 +66,7 @@ const AddPet = () => {
 		<div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-blue-50 py-16 px-6 flex justify-center">
 			<div className="w-full max-w-3xl bg-white/90 backdrop-blur-md border border-gray-200 shadow-xl rounded-3xl p-10 transition-all duration-300 hover:shadow-2xl">
 				<h2 className="text-3xl font-bold text-center text-pink-600 mb-8">
-					{!petId ? "eAdd a New Pet" : "📸 Upload Pet Images"}
+					{!petId ? "Add a New Pet" : "📸 Upload Pet Images"}
 				</h2>
 
 				{!petId ? (

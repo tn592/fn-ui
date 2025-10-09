@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Thumbs } from "swiper/modules";
 import { useState } from "react";
-import defaultImage from "../../assets/default_product.jpg";
+import defaultImage from "../../assets/default_image.jpg";
 
 const PetImageGallery = ({ images, PetName }) => {
 	const [thumbsSwiper] = useState(null);
