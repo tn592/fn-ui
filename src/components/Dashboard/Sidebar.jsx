@@ -7,7 +7,7 @@ import {
 } from "react-icons/fi";
 import { Link } from "react-router";
 import useAuthContext from "../../hooks/useAuthContext";
-import { MdOutlineManageAccounts } from "react-icons/md";
+import { MdAttachMoney, MdOutlineManageAccounts } from "react-icons/md";
 
 const Sidebar = () => {
 	const { user } = useAuthContext();
@@ -15,6 +15,11 @@ const Sidebar = () => {
 	const customerMenus = [
 		{ to: "profile", icon: MdOutlineManageAccounts, label: "Account" },
 		{ to: "/dashboard/pets/add", icon: FiPlusCircle, label: "Add Pet" },
+		{
+			to: "/dashboard/deposit-money",
+			icon: MdAttachMoney,
+			label: "Deposit Money",
+		},
 		{
 			to: "/dashboard/adoption-history",
 			icon: FiShoppingCart,
@@ -25,6 +30,11 @@ const Sidebar = () => {
 
 	const adminMenus = [
 		{ to: "profile", icon: MdOutlineManageAccounts, label: "Account" },
+		{
+			to: "/dashboard/deposit-money",
+			icon: MdAttachMoney,
+			label: "Deposit Money",
+		},
 		{ to: "/dashboard/pets/add", icon: FiPlusCircle, label: "Add Pet" },
 		{ to: "/categories", icon: FiTag, label: "Categories" },
 		{ to: "/categories/add", icon: FiPlusCircle, label: "Add Category" },

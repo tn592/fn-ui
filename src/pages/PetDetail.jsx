@@ -18,7 +18,7 @@ const PetDetail = () => {
 	const [pet, setPet] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const { petId } = useParams();
-	const { user } = useAuthContext(); // get user info
+	const { user } = useAuthContext();
 
 	useEffect(() => {
 		setLoading(true);
@@ -138,6 +138,7 @@ const PetDetail = () => {
 					<div className="flex flex-wrap gap-4">
 						{pet.availability ? (
 							<AdoptButton
+								adoptionCost={pet.price}
 								petId={pet.id}
 								onAdoptSuccess={() =>
 									setPet({ ...pet, availability: false })

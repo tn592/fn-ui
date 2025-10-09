@@ -16,6 +16,7 @@ import PetDetail from "../pages/PetDetail";
 import EditPetDetails from "../pages/EditPetDetails";
 import Profile from "../pages/Profile";
 import AdoptionHistory from "../components/Adoptions/AdoptionHistory";
+import DepositMoney from "../components/Dashboard/Profile/DepositMoney";
 
 const AppRoutes = () => {
   return (
@@ -46,6 +47,7 @@ const AppRoutes = () => {
         <Route index element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
         <Route path="pets/add" element={<AddPet />} />
+        <Route path="deposit-money" element={<DepositMoney />} />
         <Route
           path="shop/:petId/edit-pet-details"
           element={<EditPetDetails />}
