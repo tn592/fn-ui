@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router";
 import PetImageGallery from "../components/PetDetails/PetImageGallery";
+
 import {
 	FaArrowLeft,
 	FaPaw,
@@ -13,6 +14,7 @@ import apiClient from "../services/api-client";
 import useAuthContext from "../hooks/useAuthContext";
 import useFetchCategories from "../hooks/useFetchCategories";
 import AdoptButton from "../components/Adoptions/AdoptButton";
+import ReviewSection from "../components/Reviews/ReviewSection";
 
 const PetDetail = () => {
 	const [pet, setPet] = useState(null);
@@ -165,6 +167,7 @@ const PetDetail = () => {
 						`${pet.name} is a wonderful companion who’ll brighten your days and make your home full of happiness.`}
 				</p>
 			</div>
+			<ReviewSection />
 		</div>
 	);
 };
