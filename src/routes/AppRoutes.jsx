@@ -17,6 +17,7 @@ import EditPetDetails from "../pages/EditPetDetails";
 import Profile from "../pages/Profile";
 import AdoptionHistory from "../components/Adoptions/AdoptionHistory";
 import DepositMoney from "../components/Dashboard/Profile/DepositMoney";
+import Users from "../components/Dashboard/Profile/Users";
 
 const AppRoutes = () => {
   return (
@@ -24,17 +25,17 @@ const AppRoutes = () => {
       <Route element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="shop" element={<Shop />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="activate/:uid/:token" element={<ActivateAccount />} />
-        <Route path="resend-activation" element={<ResendActivation />} />
-        <Route path="reset-password" element={<ResetPassword />} />
-        <Route
-          path="password/reset/confirm/:uid/:token"
-          element={<ResetPasswordConfirm />}
-        />
         <Route path="shop/:petId" element={<PetDetail />} />
       </Route>
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="activate/:uid/:token" element={<ActivateAccount />} />
+      <Route path="resend-activation" element={<ResendActivation />} />
+      <Route path="reset-password" element={<ResetPassword />} />
+      <Route
+        path="password/reset/confirm/:uid/:token"
+        element={<ResetPasswordConfirm />}
+      />
       {/* Private Routes  */}
       <Route
         path="dashboard"
@@ -48,6 +49,7 @@ const AppRoutes = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="pets/add" element={<AddPet />} />
         <Route path="deposit-money" element={<DepositMoney />} />
+        <Route path="user-list" element={<Users />} />
         <Route
           path="shop/:petId/edit-pet-details"
           element={<EditPetDetails />}

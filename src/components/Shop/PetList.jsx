@@ -10,8 +10,8 @@ const PetList = ({ pets, loading }) => {
 
 	if (pets.length === 0)
 		return (
-			<div className="text-center py-20 text-gray-500 text-lg">
-				No pets found 
+			<div className="flex justify-center items-center py-20">
+				<span className="loading loading-dots loading-lg text-pink-500"></span>
 			</div>
 		);
 

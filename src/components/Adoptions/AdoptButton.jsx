@@ -6,13 +6,15 @@ const AdoptButton = ({ petId, onAdoptSuccess, adoptionCost }) => {
 	const [loading, setLoading] = useState(false);
 	const [userBalance, setUserBalance] = useState(null);
 	const [message, setMessage] = useState("");
-	const [messageType, setMessageType] = useState("info"); //
+	const [messageType, setMessageType] = useState("info");
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
 				const res = await authApiClient.get("/auth/users/me/");
 				setUserBalance(res.data.account_balance);
+				setIsLoggedIn(true);
 			} catch (error) {
 				console.log("Failed to fetch user info:", error);
 			}
@@ -27,6 +29,11 @@ const AdoptButton = ({ petId, onAdoptSuccess, adoptionCost }) => {
 	};
 
 	const handleAdopt = async () => {
+		if (!isLoggedIn) {
+			showMessage("You must be logged in to adopt! 🔒", "error");
+			return;
+		}
+
 		if (userBalance < adoptionCost) {
 			showMessage("Insufficient balance to adopt this pet! ❌", "error");
 			return;
@@ -40,7 +47,7 @@ const AdoptButton = ({ petId, onAdoptSuccess, adoptionCost }) => {
 			if (onAdoptSuccess) onAdoptSuccess();
 		} catch (error) {
 			console.log(error);
-			showMessage("Failed to adopt pet. Please try again.", "error");
+			showMessage("Please log in to adopt.", "error");
 		} finally {
 			setLoading(false);
 		}

@@ -59,7 +59,7 @@ const PetDetail = () => {
 					<FaArrowLeft /> Back to Shop
 				</Link>
 
-				{user && (
+				{user?.is_staff && (
 					<Link
 						to={`/dashboard/shop/${petId}/edit-pet-details`}
 						className="btn btn-sm gap-2 bg-yellow-400 hover:bg-yellow-500 text-white border-none rounded-xl shadow-md transition-all"

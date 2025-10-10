@@ -1,82 +1,88 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuthContext from "../../hooks/useAuthContext";
 import { FiMenu, FiX } from "react-icons/fi";
 
-const Navbar = ({ sidebarOpen }) => {
+const Navbar = ({ menuOpen, toggleMenu }) => {
 	const { user, logoutUser } = useAuthContext();
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		logoutUser();
+		navigate("/");
+	};
 
 	return (
-		<div className="navbar bg-white shadow-sm border-b border-base-200 px-4 lg:px-8">
-			{/* Mobile sidebar toggle */}
-			<div className="flex-none lg:hidden">
-				<label
-					htmlFor="drawer-toggle"
-					className="btn btn-ghost btn-square"
-				>
-					{sidebarOpen ? (
-						<FiX className="h-5 w-5" />
-					) : (
-						<FiMenu className="h-5 w-5" />
-					)}
-				</label>
-			</div>
-
+		<nav className="bg-white shadow-md border-b border-gray-200 px-4 lg:px-12 py-3 flex items-center justify-between z-50 relative">
 			{/* Brand */}
-			<div className="flex-1">
-				<div
-					to="/"
-					className="font-semibold text-lg tracking-wide text-base-content"
-				>
-					FurNest
-				</div>
+			<Link
+				to="/"
+				className="text-2xl font-bold text-primary tracking-tight"
+			>
+				FurNest
+			</Link>
+
+			{/* Desktop Menu */}
+			<div className="hidden lg:flex items-center gap-8">
+				{user && (
+					<>
+						<Link
+							to="/"
+							className="text-gray-700 hover:text-primary font-medium transition-colors"
+						>
+							Home
+						</Link>
+						<Link
+							to="/shop"
+							className="text-gray-700 hover:text-primary font-medium transition-colors"
+						>
+							Pets
+						</Link>
+					</>
+				)}
 			</div>
 
-			{/* Desktop menu */}
-			{user && (
-				<div className="hidden lg:flex items-center gap-6">
-					<Link to="/" className="link link-hover font-medium">
-						Home
-					</Link>
-					<Link to="/shop" className="link link-hover font-medium">
-						Pets
-					</Link>
-					<details className="dropdown">
-						<summary className="cursor-pointer font-medium">
-							User
-						</summary>
-						<ul className="menu dropdown-content bg-white shadow-md rounded-box w-40 p-2 mt-2">
-							<li>
-								<a>Profile</a>
-							</li>
-							<li>
-								<a>Adoptions</a>
-							</li>
-						</ul>
-					</details>
-				</div>
-			)}
-
-			{/* Auth buttons */}
-			<div className="navbar-end">
+			{/* Auth Buttons */}
+			<div className="hidden lg:flex items-center gap-4">
 				{user ? (
 					<button
-						onClick={logoutUser}
-						className="btn btn-sm btn-primary"
+						onClick={handleLogout}
+						className="px-4 py-1 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors"
 					>
 						Logout
 					</button>
 				) : (
-					<div className="flex gap-2">
-						<Link to="/login" className="btn btn-sm btn-primary">
+					<>
+						<Link
+							to="/login"
+							className="px-4 py-1 rounded-lg bg-primary text-white font-medium hover:bg-primary-dark transition-colors"
+						>
 							Login
 						</Link>
-						<Link to="/register" className="btn btn-sm btn-outline">
+						<Link
+							to="/register"
+							className="px-4 py-1 rounded-lg border border-primary text-primary font-medium hover:bg-primary hover:text-white transition-colors"
+						>
 							Register
 						</Link>
-					</div>
+					</>
 				)}
 			</div>
-		</div>
+
+			{/* Mobile Menu Toggle */}
+			<div className="lg:hidden">
+				<button
+					onClick={toggleMenu}
+					className="btn btn-ghost btn-square"
+					aria-label="Toggle Menu"
+				>
+					{menuOpen ? (
+						<FiX className="h-6 w-6 text-gray-700" />
+					) : (
+						<FiMenu className="h-6 w-6 text-gray-700" />
+					)}
+				</button>
+			</div>
+		</nav>
 	);
 };
 
