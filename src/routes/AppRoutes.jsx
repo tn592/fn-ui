@@ -18,6 +18,10 @@ import Profile from "../pages/Profile";
 import AdoptionHistory from "../components/Adoptions/AdoptionHistory";
 import DepositMoney from "../components/Dashboard/Profile/DepositMoney";
 import Users from "../components/Dashboard/Profile/Users";
+import CategoryCard from "../components/Categories/CategoryCard";
+import PaymentSuccess from "../pages/PaymentSuccess";
+import PaymentHistory from "../pages/PaymentHistory";
+
 
 const AppRoutes = () => {
   return (
@@ -26,6 +30,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="shop" element={<Shop />} />
         <Route path="shop/:petId" element={<PetDetail />} />
+        <Route path="/category/:id" element={<CategoryCard />} />
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
@@ -50,6 +55,8 @@ const AppRoutes = () => {
         <Route path="pets/add" element={<AddPet />} />
         <Route path="deposit-money" element={<DepositMoney />} />
         <Route path="user-list" element={<Users />} />
+        <Route path="payment/success/" element={<PaymentSuccess />} />
+        <Route path="payment/history/" element={<PaymentHistory />} />
         <Route
           path="shop/:petId/edit-pet-details"
           element={<EditPetDetails />}

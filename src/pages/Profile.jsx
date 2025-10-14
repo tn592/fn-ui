@@ -17,24 +17,22 @@ const Profile = () => {
 		setValue,
 		formState: { errors, isSubmitting },
 	} = useForm();
+
 	useEffect(() => {
-		// setValue("first_name", user.first_name);
-		// setValue("last_name", user.last_name);
 		Object.keys(user).forEach((key) => setValue(key, user[key]));
 	}, [user, setValue]);
 
 	const onSubmit = async (data) => {
 		try {
-			// Profile Update
 			const profilePayload = {
 				first_name: data.first_name,
 				last_name: data.last_name,
 				address: data.address,
 				phone_number: data.phone_number,
-				account_balance: data.account_balance
+				account_balance: data.account_balance,
 			};
 			await updateUserProfile(profilePayload);
-			// Password Change
+
 			if (data.current_password && data.new_password) {
 				await changePassword({
 					current_password: data.current_password,
@@ -47,32 +45,51 @@ const Profile = () => {
 	};
 
 	return (
-		<div className="card w-full max-w-2xl mx-auto bg-base-100 shadow-xl">
-			<div className="card-body">
-				{errorMsg && <ErrorAlert error={errorMsg} />}
-				<h2 className="card-title text-2xl mb-4">
-					Profile Imformation
-				</h2>
-				<form onSubmit={handleSubmit(onSubmit)}>
-					<ProfileForm
-						register={register}
-						errors={errors}
-						isEditing={isEditing}
-					/>
+		<div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-rose-100 via-rose-200 to-indigo-200 p-6">
+			<div className="w-full max-w-2xl bg-white/50 backdrop-blur-xl rounded-3xl shadow-2xl border border-rose-200/50 overflow-hidden transition-all hover:shadow-pink-200/60">
+				<div className="p-8 space-y-6">
+					{/* Header */}
+					<div className="text-center">
+						<h2 className="text-3xl font-bold text-indigo-700 tracking-wide">
+							Profile Information
+						</h2>
+					</div>
 
-					<PasswordChangeForm
-						errors={errors}
-						register={register}
-						isEditing={isEditing}
-						watch={watch}
-					/>
+					{/* Error Message */}
+					{errorMsg && (
+						<div className="animate-fade-in">
+							<ErrorAlert error={errorMsg} />
+						</div>
+					)}
 
-					<ProfileButtons
-						isEditing={isEditing}
-						setIsEditing={setIsEditing}
-						isSubmitting={isSubmitting}
-					/>
-				</form>
+					{/* Form */}
+					<form
+						onSubmit={handleSubmit(onSubmit)}
+						className="space-y-6"
+					>
+						<ProfileForm
+							register={register}
+							errors={errors}
+							isEditing={isEditing}
+						/>
+
+						<PasswordChangeForm
+							errors={errors}
+							register={register}
+							isEditing={isEditing}
+							watch={watch}
+						/>
+
+						<ProfileButtons
+							isEditing={isEditing}
+							setIsEditing={setIsEditing}
+							isSubmitting={isSubmitting}
+						/>
+					</form>
+				</div>
+
+				{/* Subtle Footer Accent */}
+				<div className="bg-gradient-to-r from-rose-300 to-indigo-400 h-2 w-full" />
 			</div>
 		</div>
 	);

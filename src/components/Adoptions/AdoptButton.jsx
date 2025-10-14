@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import authApiClient from "../../services/auth-api-client";
+import useAuthContext from "../../hooks/useAuthContext";
 
 const AdoptButton = ({ petId, onAdoptSuccess, adoptionCost }) => {
 	const [isAdopted, setIsAdopted] = useState(false);
@@ -7,14 +8,13 @@ const AdoptButton = ({ petId, onAdoptSuccess, adoptionCost }) => {
 	const [userBalance, setUserBalance] = useState(null);
 	const [message, setMessage] = useState("");
 	const [messageType, setMessageType] = useState("info");
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const { user } = useAuthContext();
 
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
 				const res = await authApiClient.get("/auth/users/me/");
 				setUserBalance(res.data.account_balance);
-				setIsLoggedIn(true);
 			} catch (error) {
 				console.log("Failed to fetch user info:", error);
 			}
@@ -29,27 +29,51 @@ const AdoptButton = ({ petId, onAdoptSuccess, adoptionCost }) => {
 	};
 
 	const handleAdopt = async () => {
-		if (!isLoggedIn) {
-			showMessage("You must be logged in to adopt! 🔒", "error");
+		if (!user) {
+			showMessage("You must be logged in to adopt!", "error");
 			return;
 		}
 
-		if (userBalance < adoptionCost) {
+		if (adoptionCost === 0) {
+			setLoading(true);
+			try {
+				await authApiClient.post("/adoptions/", { pet_id: petId });
+				showMessage("Pet adopted successfully!", "success");
+				setIsAdopted(true);
+				if (onAdoptSuccess) onAdoptSuccess();
+			} catch (error) {
+				console.log(error);
+				showMessage("Adoption failed. Please log in again.", "error");
+			} finally {
+				setLoading(false);
+			}
+		} else if (adoptionCost > 0 && userBalance >= adoptionCost) {
+			setLoading(true);
+			try {
+				const adoptionRes = await authApiClient.post("/adoptions/", {
+					pet_id: petId,
+				});
+				const paymentRes = await authApiClient.post(
+					"/payment/initiate/",
+					{
+						amount: adoptionCost,
+						adoptionId: adoptionRes.data.id,
+					},
+				);
+
+				if (paymentRes.data.payment_url) {
+					window.location.href = paymentRes.data.payment_url;
+				} else {
+					showMessage("Payment initialization failed ❌", "error");
+				}
+			} catch (error) {
+				console.log(error);
+				showMessage("Something went wrong during payment.", "error");
+			} finally {
+				setLoading(false);
+			}
+		} else {
 			showMessage("Insufficient balance to adopt this pet! ❌", "error");
-			return;
-		}
-
-		setLoading(true);
-		try {
-			await authApiClient.post("/adoptions/", { pet_id: petId });
-			showMessage("Pet adopted successfully!", "success");
-			setIsAdopted(true);
-			if (onAdoptSuccess) onAdoptSuccess();
-		} catch (error) {
-			console.log(error);
-			showMessage("Please log in to adopt.", "error");
-		} finally {
-			setLoading(false);
 		}
 	};
 

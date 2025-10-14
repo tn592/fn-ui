@@ -5,7 +5,7 @@ import {
 	FiTag,
 	FiUsers,
 } from "react-icons/fi";
-import { MdAttachMoney, MdOutlineManageAccounts } from "react-icons/md";
+import { MdAttachMoney, MdOutlineManageAccounts, MdPayment } from "react-icons/md";
 import { Link } from "react-router";
 import useAuthContext from "../hooks/useAuthContext";
 
@@ -21,6 +21,7 @@ export default function Dashboard() {
 			icon: FiShoppingCart,
 			label: "Adoption History",
 		},
+		{ to: "payment/history/", icon: MdPayment, label: "Payment History"}
 	];
 
 	const adminMenus = [

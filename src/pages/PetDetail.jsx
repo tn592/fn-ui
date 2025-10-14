@@ -31,9 +31,10 @@ const PetDetail = () => {
 	}, [petId]);
 
 	const categories = useFetchCategories();
-	const categoryName =
-		categories?.find((cat) => cat.id === pet.category)?.name ||
-		"No Category";
+	const categoryName = pet
+		? categories?.find((cat) => cat.id === pet.category)?.name ||
+			"No Category"
+		: "Loading...";
 
 	if (loading)
 		return (

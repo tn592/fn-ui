@@ -10,9 +10,7 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const navigate = useNavigate();
-
   const { errorMsg, loginUser } = useAuthContext();
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +18,6 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await loginUser(data);
-      console.log(response);
       if (response.success) navigate("/");
     } catch (error) {
       console.log("Login Failed", error);
@@ -30,79 +27,86 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4 py-12 bg-base-200">
-      <div className="card w-full max-w-md bg-base-100 shadow-xl">
-        <div className="card-body">
-          {errorMsg && <ErrorAlert error={errorMsg} />}
-          <h2 className="card-title text-2xl font-bold">Sign in</h2>
-          <p className="text-base-content/70">
-            Enter your email and password to access your account
+    <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+        {/* Header */}
+        <div className="bg-primary text-white text-center py-6 px-6">
+          <h2 className="text-2xl font-bold">Login to your account</h2>
+          <p className="text-sm opacity-90">
+            Access your personalized dashboard and manage your experience.
           </p>
+        </div>
 
-          <form className="space-y-4 mt-4" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-control">
-              <label className="label" htmlFor="email">
-                <span className="label-text">Email</span>
+        {/* Body */}
+        <div className="p-8">
+          {errorMsg && <ErrorAlert error={errorMsg} />}
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+            {/* Email */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Email Address
               </label>
               <input
                 id="email"
                 type="email"
                 placeholder="name@example.com"
-                className={`input input-bordered w-full ${
+                className={`mt-2 input input-bordered w-full ${
                   errors.email ? "input-error" : ""
                 }`}
                 {...register("email", { required: "Email is required" })}
               />
               {errors.email && (
-                <span className="label-text-alt text-error">
+                <p className="mt-1 text-xs text-error">
                   {errors.email.message}
-                </span>
+                </p>
               )}
             </div>
 
-            <div className="form-control">
-              <label className="label" htmlFor="password">
-                <span className="label-text">Password</span>
+            {/* Password */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Password
               </label>
               <input
                 id="password"
                 type="password"
                 placeholder="••••••••"
-                className={`input input-bordered w-full ${
-                  errors.email ? "input-error" : ""
+                className={`mt-2 input input-bordered w-full ${
+                  errors.password ? "input-error" : ""
                 }`}
                 {...register("password", { required: "Password is required" })}
               />
               {errors.password && (
-                <span className="label-text-alt text-error">
+                <p className="mt-1 text-xs text-error">
                   {errors.password.message}
-                </span>
+                </p>
               )}
             </div>
 
+            {/* Button */}
             <button
               type="submit"
-              className="btn btn-primary w-full"
+              className="btn btn-primary w-full mt-2"
               disabled={loading}
             >
-              {loading ? "Logging In..." : "Login"}
+              {loading ? "Logging in..." : "Login"}
             </button>
           </form>
-          <div className="mt-4">
-            <p className="text-sm">
-              <Link to="/reset-password" className="link link-primary">
-                Forgot Password?{" "}
-              </Link>
-            </p>
-          </div>
 
-          <div className="text-center mt-4">
-            <p className="text-base-content/70">
-              Don&apos;t have an account?{" "}
-              <Link to="/register" className="link link-primary">
-                Sign up
-              </Link>
-            </p>
+          {/* Extra Links */}
+          <div className="flex items-center justify-between mt-4 text-sm">
+            <Link to="/reset-password" className="link link-primary">
+              Forgot password?
+            </Link>
+            <Link to="/register" className="link link-primary">
+              Create an account
+            </Link>
           </div>
         </div>
       </div>

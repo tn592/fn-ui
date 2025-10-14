@@ -1,3 +1,5 @@
+import { FaAngleRight } from "react-icons/fa";
+import { useNavigate } from "react-router";
 import bird from "../../assets/bird.jpg";
 import cat from "../../assets/cat.jpg";
 import dog from "../../assets/dog.jpg";
@@ -6,6 +8,8 @@ import hamster from "../../assets/hamsters.jpg";
 import rabbit from "../../assets/rabbit.jpg";
 
 const CategoryList = ({ index, category }) => {
+	const navigate = useNavigate();
+
 	const gradients = [
 		"from-pink-100 via-pink-50 to-blue-100",
 		"from-blue-100 via-blue-50 to-purple-100",
@@ -50,6 +54,12 @@ const CategoryList = ({ index, category }) => {
 					{category.name}
 				</h3>
 				<p className="text-gray-600 mb-6">{category.description}</p>
+				<button
+					onClick={() => navigate(`/category/${category.id}`)}
+					className="btn btn-secondary rounded-full px-6 text-base flex items-center mx-auto md:mx-0"
+				>
+					Explore <FaAngleRight className="ml-2" />
+				</button>
 			</div>
 		</div>
 	);

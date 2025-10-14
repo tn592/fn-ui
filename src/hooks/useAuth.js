@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
+import authApiClient from "../services/auth-api-client";
 
 const useAuth = () => {
 	const [user, setUser] = useState(null);
@@ -39,9 +40,7 @@ const useAuth = () => {
 	// Fetch user Profile
 	const fetchUserProfile = async () => {
 		try {
-			const response = await apiClient.get("/auth/users/me", {
-				headers: { Authorization: `JWT ${authTokens?.access}` },
-			});
+			const response = await authApiClient.get("/auth/users/me");
 			setUser(response.data);
 		} catch (error) {
 			console.log("Error Fetching user", error);
@@ -52,11 +51,7 @@ const useAuth = () => {
 	const updateUserProfile = async (data) => {
 		setErrorMsg("");
 		try {
-			await apiClient.put("/auth/users/me/", data, {
-				headers: {
-					Authorization: `JWT ${authTokens?.access}`,
-				},
-			});
+			await authApiClient.put("/auth/users/me/", data);
 		} catch (error) {
 			return handleAPIError(error);
 		}
@@ -66,11 +61,7 @@ const useAuth = () => {
 	const changePassword = async (data) => {
 		setErrorMsg("");
 		try {
-			await apiClient.post("/auth/users/set_password/", data, {
-				headers: {
-					Authorization: `JWT ${authTokens?.access}`,
-				},
-			});
+			await authApiClient.post("/auth/users/set_password/", data);
 		} catch (error) {
 			return handleAPIError(error);
 		}
