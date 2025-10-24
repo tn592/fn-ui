@@ -11,7 +11,7 @@ const ReviewSection = () => {
 	const [reviews, setReviews] = useState([]);
 	const [userCanReview, setUserCanReview] = useState(false);
 	const [isLoading, setLoading] = useState(true);
-	const [editReview, setEditReview] = useState({comment: "" });
+	const [editReview, setEditReview] = useState({ comment: "", ratings: 5 });
 	const [editingId, setEditingId] = useState(null);
 	const { user } = useAuthContext();
 
@@ -47,10 +47,10 @@ const ReviewSection = () => {
 
 	const handleUpdateReview = async (reviewId) => {
 		try {
-			await authApiClient.put(
-				`/pets/${petId}/reviews/${reviewId}/`,
-				editReview,
-			);
+			await authApiClient.put(`/pets/${petId}/reviews/${reviewId}/`, {
+				comment: editReview.comment?.trim() || "",
+				ratings: editReview.ratings || 5,
+			});
 			setEditingId(null);
 			fetchReviews();
 		} catch (error) {

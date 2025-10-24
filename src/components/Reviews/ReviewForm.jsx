@@ -5,10 +5,16 @@ const ReviewForm = ({ onSubmit }) => {
 		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
+		reset,
 	} = useForm();
 
+	const handleFormSubmit = (data) => {
+		onSubmit({ ...data, ratings: 5 }); 
+		reset();
+	};
+
 	return (
-		<form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+		<form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
 			<div className="form-control">
 				<label className="label font-medium text-pink-700">
 					Your Review <span className="text-error">*</span>
