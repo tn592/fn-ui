@@ -1,38 +1,14 @@
 import { useForm } from "react-hook-form";
-import StarRating from "./StarRating";
 
 const ReviewForm = ({ onSubmit }) => {
 	const {
 		register,
-		setValue,
 		handleSubmit,
-		watch,
 		formState: { errors, isSubmitting },
 	} = useForm();
 
-	const ratingValue = watch("ratings", 0);
-
 	return (
 		<form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-			<div>
-				<label className="label font-medium text-pink-700">
-					Rating <span className="text-error">*</span>
-				</label>
-				<StarRating
-					onChange={(value) => setValue("ratings", value)}
-					rating={ratingValue}
-				/>
-				{errors.ratings && (
-					<p className="text-error text-sm mt-1">
-						Please provide a rating!
-					</p>
-				)}
-				<input
-					type="hidden"
-					{...register("ratings", { required: true })}
-				/>
-			</div>
-
 			<div className="form-control">
 				<label className="label font-medium text-pink-700">
 					Your Review <span className="text-error">*</span>

@@ -1,5 +1,3 @@
-import StarRating from "./StarRating";
-
 const EditReviewForm = ({
 	editReview,
 	setEditReview,
@@ -8,7 +6,7 @@ const EditReviewForm = ({
 }) => {
 	return (
 		<div className="mt-4 space-y-4 bg-pink-50 border border-pink-100 p-4 rounded-xl">
-			<div>
+			{/* <div>
 				<label className="label-text font-semibold mb-1 block text-pink-700">
 					Rating
 				</label>
@@ -18,7 +16,8 @@ const EditReviewForm = ({
 						setEditReview({ ...editReview, ratings: value })
 					}
 				/>
-			</div>
+			</div> */}
+
 			<div>
 				<label className="label-text font-semibold mb-1 block text-pink-700">
 					Comment

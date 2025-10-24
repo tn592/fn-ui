@@ -21,7 +21,6 @@ const ReviewList = ({
 			onEditClick={() => {
 				setEditingId(review.id);
 				setEditReview({
-					ratings: review.ratings,
 					comment: review.comment,
 				});
 			}}

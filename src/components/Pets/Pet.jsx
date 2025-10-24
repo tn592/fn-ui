@@ -60,16 +60,16 @@ const Pet = () => {
 					<div className="relative">
 						<Swiper
 							modules={[Navigation]}
-							spaceBetween={24}
-							slidesPerView={1}
+							spaceBetween={12} // smaller gap between cards
+							slidesPerView={3} // 3 cards per slide by default
 							navigation={{
 								nextEl: ".custom-next",
 								prevEl: ".custom-prev",
 							}}
 							breakpoints={{
-								640: { slidesPerView: 2 },
+								640: { slidesPerView: 2 }, // optional: smaller screens show 2 cards
 								1024: { slidesPerView: 3 },
-								1280: { slidesPerView: 4 },
+								1280: { slidesPerView: 3 }, // keep 3 cards on large screens
 							}}
 							className="pb-10"
 						>

@@ -11,7 +11,7 @@ const ReviewSection = () => {
 	const [reviews, setReviews] = useState([]);
 	const [userCanReview, setUserCanReview] = useState(false);
 	const [isLoading, setLoading] = useState(true);
-	const [editReview, setEditReview] = useState({ ratings: 0, comment: "" });
+	const [editReview, setEditReview] = useState({comment: "" });
 	const [editingId, setEditingId] = useState(null);
 	const { user } = useAuthContext();
 

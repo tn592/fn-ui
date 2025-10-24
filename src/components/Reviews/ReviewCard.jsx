@@ -1,4 +1,4 @@
-import { FaStar, FaEdit, FaTrashAlt } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import EditReviewForm from "./EditReviewForm";
 
 const ReviewCard = ({
@@ -17,16 +17,6 @@ const ReviewCard = ({
       <div className="flex flex-col md:flex-row justify-between md:items-center gap-3">
         <div>
           <p className="font-semibold text-gray-800">{review.user.name}</p>
-          <div className="flex items-center gap-2 mt-1">
-            {[...Array(5)].map((_, i) => (
-              <FaStar
-                key={i}
-                className={`${
-                  i < review.ratings ? "text-yellow-400" : "text-gray-300"
-                } transition-colors duration-300`}
-              />
-            ))}
-          </div>
         </div>
 
         {user && user.id === review.user.id && (

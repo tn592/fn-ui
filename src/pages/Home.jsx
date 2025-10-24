@@ -4,6 +4,7 @@ import apiClient from "../services/api-client";
 import Pet from "../components/Pets/Pet";
 import Category from "../components/Categories/Category";
 import useAuthContext from "../hooks/useAuthContext";
+import heroImg from "../assets/hero_section_img.jpg";
 
 const Home = () => {
 	const [pets, setPets] = useState([]);
@@ -27,7 +28,18 @@ const Home = () => {
 	return (
 		<div className="bg-base-100 text-gray-800">
 			{/*  HERO SECTION  */}
-			<section className="relative bg-gradient-to-tr from-secondary/90 via-primary/80 to-accent/70 text-white overflow-hidden">
+			<section
+				className="relative text-white overflow-hidden"
+				style={{
+					backgroundImage: `
+			linear-gradient(to top right, rgba(139, 92, 246, 0.85), rgba(236, 72, 153, 0.75), rgba(252, 211, 77, 0.65)),
+			url(${heroImg})
+		`,
+					backgroundSize: "cover",
+					backgroundPosition: "center",
+					backgroundRepeat: "no-repeat",
+				}}
+			>
 				{/* Content */}
 				<div className="relative max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between py-24 px-6 lg:px-12">
 					{/* LEFT CONTENT */}
@@ -59,14 +71,10 @@ const Home = () => {
 		}
 	`}</style>
 			</section>
-
 			{/*Category Section*/}
-
 			<Category />
-
 			{/* FEATURED PETS */}
 			<Pet />
-
 			{/* TESTIMONIAL */}
 			<section className="py-16 text-center max-w-4xl mx-auto px-6">
 				<h2 className="text-3xl font-bold mb-8">
@@ -80,8 +88,7 @@ const Home = () => {
 					<h4 className="font-semibold text-primary">— Emma</h4>{" "}
 				</div>
 			</section>
-
-			{/* CTA  */}
+			;{/* CTA  */}
 			<section className="py-16 bg-gradient-to-r from-primary/90 to-secondary/80 text-white text-center">
 				<h2 className="text-3xl font-bold mb-4">
 					Ready to Make a Difference?
@@ -107,7 +114,6 @@ const Home = () => {
 					</Link>
 				)}
 			</section>
-
 			{/* FOOTER  */}
 			<footer className="py-8 bg-base-200 text-center text-sm text-gray-600">
 				<p>
