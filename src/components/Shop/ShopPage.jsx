@@ -19,10 +19,12 @@ const ShopPage = () => {
 
 	return (
 		<div className="max-w-7xl mx-auto px-6 py-10 bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 rounded-3xl shadow-inner">
-			<h1 className="text-4xl font-bold text-center mb-10 text-pink-600 tracking-wide drop-shadow-sm">
+			{/* Heading */}
+			<h1 className="text-4xl font-bold text-center mb-8 text-pink-600 tracking-wide drop-shadow-sm">
 				Find Your Desirable Pet
 			</h1>
 
+			{/* Filters */}
 			<FilterSection
 				categories={categories}
 				selectedCategory={selectedCategory}
@@ -31,8 +33,10 @@ const ShopPage = () => {
 				handleSearchQuery={setSearchQuery}
 			/>
 
+			{/* Pet List */}
 			<PetList pets={pets} loading={loading} />
 
+			{/* Pagination */}
 			<Pagination
 				totalPages={totalPages}
 				currentPage={currentPage}

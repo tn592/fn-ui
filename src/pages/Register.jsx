@@ -1,13 +1,15 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuthContext from "../hooks/useAuthContext";
 import ErrorAlert from "../components/ErrorAlert";
 import { useState } from "react";
 import AuthNavbar from "../layouts/AuthNavbar";
+import pawPrint from "../assets/paw_print.png";
 
 const Register = () => {
 	const { registerUser, errorMsg } = useAuthContext();
 	const [successMsg, setSuccessMsg] = useState("");
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -20,9 +22,9 @@ const Register = () => {
 		delete data.confirm_password;
 		try {
 			const response = await registerUser(data);
-			console.log(response);
 			if (response.success) {
 				setSuccessMsg(response.message);
+				// Redirect after a few seconds if you want
 				// setTimeout(() => navigate("/login"), 3000);
 			}
 		} catch (error) {
@@ -33,13 +35,20 @@ const Register = () => {
 	return (
 		<>
 			<AuthNavbar />
-
-			<div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-secondary/5 via-base-200 to-white">
-				<div className="w-full max-w-md bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-transform hover:scale-[1.01] duration-300">
+			<div
+				className="min-h-screen flex items-center justify-center px-4"
+				style={{
+					backgroundImage: `url(${pawPrint})`,
+					backgroundRepeat: "cover",
+					backgroundPosition: "center",
+					backgroundSize: "350px",
+				}}
+			>
+				<div className="w-full max-w-md bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg border border-gray-100 overflow-hidden relative transition-transform hover:scale-[1.02] duration-300">
 					{/* Header */}
 					<div className="bg-gradient-to-r from-secondary to-primary text-white text-center py-6 px-6">
 						<h2 className="text-2xl font-bold tracking-tight">
-							Create Your Account 
+							Create Your Account
 						</h2>
 						<p className="text-sm opacity-90 mt-1">
 							Join the FurNest family and start exploring!
@@ -70,13 +79,6 @@ const Register = () => {
 								<span>{successMsg}</span>
 							</div>
 						)}
-
-						<h2 className="text-xl font-semibold text-gray-800 mb-2">
-							Sign Up
-						</h2>
-						<p className="text-sm text-gray-500 mb-4">
-							Create an account to get started.
-						</p>
 
 						<form
 							onSubmit={handleSubmit(onSubmit)}
@@ -257,7 +259,7 @@ const Register = () => {
 								)}
 							</div>
 
-							{/* Submit */}
+							{/* Submit Button */}
 							<button
 								type="submit"
 								className="btn btn-secondary w-full rounded-full font-semibold text-white mt-3 hover:scale-105 transition-transform"
@@ -265,21 +267,6 @@ const Register = () => {
 								Sign Up
 							</button>
 						</form>
-
-						{/* Success Message Extra */}
-						{successMsg && (
-							<div className="mt-5 text-center text-sm">
-								<p>
-									Didn’t get the activation email?{" "}
-									<Link
-										to="/resend-activation"
-										className="text-secondary hover:underline font-medium"
-									>
-										Resend Activation Email
-									</Link>
-								</p>
-							</div>
-						)}
 
 						{/* Bottom Link */}
 						<div className="text-center mt-6 text-sm text-gray-600">

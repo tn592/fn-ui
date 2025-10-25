@@ -21,6 +21,8 @@ import Users from "../components/Dashboard/Profile/Users";
 import CategoryCard from "../components/Categories/CategoryCard";
 import PaymentSuccess from "../pages/PaymentSuccess";
 import PaymentHistory from "../pages/PaymentHistory";
+import AboutUs from "../pages/AboutUs";
+import Contact from "../pages/Contact";
 
 
 const AppRoutes = () => {
@@ -31,6 +33,8 @@ const AppRoutes = () => {
         <Route path="shop" element={<Shop />} />
         <Route path="shop/:petId" element={<PetDetail />} />
         <Route path="/category/:id" element={<CategoryCard />} />
+        <Route path="about-us" element={<AboutUs />} />
+        <Route path="contact" element={<Contact />} />
       </Route>
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />

@@ -4,6 +4,7 @@ import useAuthContext from "../hooks/useAuthContext";
 import ErrorAlert from "../components/ErrorAlert";
 import { useState } from "react";
 import AuthNavbar from "../layouts/AuthNavbar";
+import pawPrint from "../assets/paw_print.png";
 
 const Login = () => {
   const {
@@ -30,11 +31,19 @@ const Login = () => {
   return (
     <>
       <AuthNavbar />
-
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary/5 via-base-200 to-white px-4">
-        <div className="w-full max-w-md bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-transform hover:scale-[1.01] duration-300">
+      <div
+        className="min-h-screen flex items-center justify-center px-4"
+        style={{
+          backgroundImage: `url(${pawPrint})`,
+          backgroundRepeat: "cover",
+          backgroundPosition: "center",
+          backgroundSize: "350px",
+          opacity: 1,
+        }}
+      >
+        <div className="w-full max-w-md bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg border border-gray-100 overflow-hidden relative transition-transform hover:scale-[1.02] duration-300">
           {/* Header */}
-          <div className="bg-gradient-to-r from-secondary to-primary text-white text-center py-6 px-6">
+          <div className="bg-gradient-to-r from-secondary to-primary text-white text-center py-6 px-6 relative z-10">
             <h2 className="text-2xl font-bold tracking-tight">Welcome Back</h2>
             <p className="text-sm opacity-90 mt-1">
               Log in to access your cozy FurNest space.
@@ -42,7 +51,7 @@ const Login = () => {
           </div>
 
           {/* Body */}
-          <div className="p-8">
+          <div className="p-8 relative z-10">
             {errorMsg && <ErrorAlert error={errorMsg} />}
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -124,7 +133,8 @@ const Login = () => {
           </div>
         </div>
       </div>
-      {/* FOOTER  */}
+
+      {/* FOOTER */}
       <footer className="py-8 bg-base-200 text-center text-sm text-gray-600">
         <p>© {new Date().getFullYear()} FurNest. All Rights Reserved.</p>
         <p>Made with ❤️ by Admin.</p>

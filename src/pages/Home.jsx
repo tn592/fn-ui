@@ -5,7 +5,7 @@ import Pet from "../components/Pets/Pet";
 import Category from "../components/Categories/Category";
 import useAuthContext from "../hooks/useAuthContext";
 import heroImg from "../assets/hero_section_img.jpg";
-
+import defaultImage from "../assets/default_image.jpg";
 const Home = () => {
 	const [pets, setPets] = useState([]);
 	const { user } = useAuthContext();
@@ -17,7 +17,7 @@ const Home = () => {
 				const petsArray = Array.isArray(res.data)
 					? res.data
 					: res.data.results || res.data.data || [];
-				setPets(petsArray.slice(0, 6));
+				setPets(petsArray.slice(0, 3));
 			} catch (err) {
 				console.error("Failed to load pets:", err);
 			}
@@ -75,17 +75,37 @@ const Home = () => {
 			<Category />
 			{/* FEATURED PETS */}
 			<Pet />
-			{/* TESTIMONIAL */}
-			<section className="py-16 text-center max-w-4xl mx-auto px-6">
-				<h2 className="text-3xl font-bold mb-8">
+			{/* TESTIMONIAL / ADOPTED PET REVIEWS */}
+			<section className="pt-12 pb-16 bg-base-100 text-center max-w-6xl mx-auto px-6">
+				<h2 className="text-4xl font-extrabold mb-12 text-gray-800">
 					What Our Adopters Say
 				</h2>
-				<div className="bg-base-200 rounded-xl shadow-lg p-8">
-					<p className="italic text-lg text-gray-700 mb-4">
-						“FurNest helped me find my purr-fect companion. The
-						process was smooth, and now my home feels full of love!”
-					</p>
-					<h4 className="font-semibold text-primary">— Emma</h4>{" "}
+
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{pets.map((pet) => (
+						<div
+							key={pet.id}
+							className="relative bg-gradient-to-br from-purple-100/80 via-pink-100/70 to-yellow-100/70 
+                       rounded-2xl shadow-xl p-8 flex flex-col items-center text-center 
+                       transform hover:scale-105 transition-transform duration-500 hover:shadow-2xl"
+						>
+							<img
+								src={pet.images?.[0]?.image || defaultImage}
+								alt={pet.name}
+								className="w-24 h-24 rounded-full object-cover mb-4 border-4 border-white shadow-md"
+							/>
+							<h3 className="font-bold text-xl text-gray-800 mb-2">
+								{pet.name}
+							</h3>
+							<p className="text-gray-700 italic text-sm mb-3 px-4">
+								{pet.review ||
+									"This pet has brought so much joy to our home!"}
+							</p>
+							<span className="mt-2 block font-medium text-purple-600">
+								— {pet.adopterName || "A Happy Adopter"}
+							</span>
+						</div>
+					))}
 				</div>
 			</section>
 			;{/* CTA  */}
@@ -114,13 +134,6 @@ const Home = () => {
 					</Link>
 				)}
 			</section>
-			{/* FOOTER  */}
-			<footer className="py-8 bg-base-200 text-center text-sm text-gray-600">
-				<p>
-					© {new Date().getFullYear()} FurNest. All Rights Reserved.
-				</p>
-				<p>Made with ❤️ by Admin.</p>
-			</footer>
 		</div>
 	);
 };
