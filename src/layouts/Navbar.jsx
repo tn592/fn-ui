@@ -47,7 +47,7 @@ const Navbar = () => {
 								About Us
 							</Link>
 						</li>
-							<li>
+						<li>
 							<Link
 								to="contact"
 								className="relative hover:text-secondary transition-colors after:content-[''] after:absolute after:w-0 after:h-[2px] after:bg-secondary after:left-0 after:-bottom-1 hover:after:w-full after:transition-all"

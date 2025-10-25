@@ -23,6 +23,7 @@ import {
 	Legend,
 } from "chart.js";
 import useAuthContext from "../hooks/useAuthContext";
+import { useState } from "react";
 
 ChartJS.register(
 	CategoryScale,
@@ -36,6 +37,7 @@ ChartJS.register(
 
 export default function Dashboard() {
 	const { user } = useAuthContext();
+	const [sidebarOpen, setSidebarOpen] = useState(false);
 
 	const customerMenus = [
 		{ to: "profile", icon: MdOutlineManageAccounts, label: "Account" },
@@ -66,7 +68,7 @@ export default function Dashboard() {
 				data: [5, 10, 8, 12, 7, 15],
 				borderColor: "#4f46e5",
 				backgroundColor: "rgba(79, 70, 229, 0.1)",
-				tension: 0.4, // smooth curve
+				tension: 0.4,
 				fill: true,
 				pointRadius: 3,
 				pointHoverRadius: 6,
@@ -102,10 +104,27 @@ export default function Dashboard() {
 	};
 
 	return (
-		<div className="flex min-h-screen bg-gray-100">
+		<div className="flex flex-col lg:flex-row min-h-screen bg-gray-100">
 			{/* Sidebar */}
-			<aside className="w-64 bg-white shadow-lg p-6 flex flex-col">
-				<h2 className="text-2xl font-bold text-gray-800 mb-8">
+			<aside
+				className={`bg-white shadow-lg p-6 flex flex-col lg:w-64 transition-transform duration-300 ${
+					sidebarOpen
+						? "translate-x-0"
+						: "-translate-x-full lg:translate-x-0"
+				} fixed lg:relative top-0 left-0 h-full z-40 w-64`}
+			>
+				<div className="flex justify-between items-center mb-8 lg:hidden">
+					<h2 className="text-2xl font-bold text-gray-800">
+						Dashboard
+					</h2>
+					<button
+						className="text-gray-700"
+						onClick={() => setSidebarOpen(false)}
+					>
+						Close
+					</button>
+				</div>
+				<h2 className="text-2xl font-bold text-gray-800 mb-8 hidden lg:block">
 					Dashboard
 				</h2>
 				<nav className="flex-1 space-y-4">
@@ -114,6 +133,7 @@ export default function Dashboard() {
 							key={i}
 							to={item.to}
 							className="flex items-center gap-3 p-3 rounded-xl hover:bg-purple-50 transition"
+							onClick={() => setSidebarOpen(false)}
 						>
 							<item.icon className="text-xl text-purple-600" />
 							<span className="text-gray-700 font-medium">
@@ -124,10 +144,20 @@ export default function Dashboard() {
 				</nav>
 			</aside>
 
+			{/* Mobile Sidebar Toggle */}
+			<div className="lg:hidden p-4">
+				<button
+					onClick={() => setSidebarOpen(true)}
+					className="px-3 py-1 bg-purple-600 text-white rounded-lg"
+				>
+					Menu
+				</button>
+			</div>
+
 			{/* Main Content */}
-			<main className="flex-1 p-8 overflow-y-auto">
+			<main className="flex-1 p-4 lg:p-8 overflow-y-auto lg:ml-64">
 				{/* Header */}
-				<header className="flex justify-between items-center mb-8">
+				<header className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-2">
 					<h1 className="text-3xl font-bold text-gray-800">
 						Welcome, {user?.first_name}!
 					</h1>

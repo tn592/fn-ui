@@ -82,6 +82,66 @@ const Navbar = ({ menuOpen, toggleMenu }) => {
 					)}
 				</button>
 			</div>
+
+			{/* Mobile Menu */}
+			{menuOpen && (
+				<div className="absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-md lg:hidden">
+					<ul className="flex flex-col py-4 px-6 gap-4">
+						{user && (
+							<>
+								<li>
+									<Link
+										to="/"
+										className="text-gray-700 font-medium hover:text-primary transition-colors"
+										onClick={toggleMenu}
+									>
+										Home
+									</Link>
+								</li>
+								<li>
+									<Link
+										to="/shop"
+										className="text-gray-700 font-medium hover:text-primary transition-colors"
+										onClick={toggleMenu}
+									>
+										Pets
+									</Link>
+								</li>
+							</>
+						)}
+						<li>
+							{user ? (
+								<button
+									onClick={() => {
+										handleLogout();
+										toggleMenu();
+									}}
+									className="w-full text-left text-red-500 font-medium hover:text-red-600 transition-colors"
+								>
+									Logout
+								</button>
+							) : (
+								<>
+									<Link
+										to="/login"
+										className="block w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-colors"
+										onClick={toggleMenu}
+									>
+										Login
+									</Link>
+									<Link
+										to="/register"
+										className="block w-full text-left px-2 py-1 rounded hover:bg-gray-100 transition-colors"
+										onClick={toggleMenu}
+									>
+										Register
+									</Link>
+								</>
+							)}
+						</li>
+					</ul>
+				</div>
+			)}
 		</nav>
 	);
 };
