@@ -11,7 +11,6 @@ import rabbit from "../../assets/rabbit.jpg";
 const CategoryList = ({ index, category }) => {
 	const navigate = useNavigate();
 
-	// Gradient palette
 	const gradients = [
 		"from-rose-100 via-pink-50 to-blue-100",
 		"from-blue-100 via-blue-50 to-purple-100",
@@ -35,12 +34,14 @@ const CategoryList = ({ index, category }) => {
 
 	return (
 		<div
-			className={`rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-gradient-to-br ${
+			className={`relative rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500 bg-gradient-to-br ${
 				gradients[index % gradients.length]
-			} overflow-hidden flex flex-col md:flex-row items-center border border-white/50 backdrop-blur-sm`}
+			} overflow-hidden flex flex-col md:flex-row items-center border border-white/40 backdrop-blur-md`}
 		>
+			<div className="absolute inset-0 bg-white/60 pointer-events-none z-0"></div>
+
 			{/* Image Section */}
-			<div className="md:w-1/2 w-full h-64 md:h-80 overflow-hidden relative">
+			<div className="md:w-1/2 w-full h-64 md:h-80 overflow-hidden relative z-10">
 				<img
 					src={categoryImage}
 					alt={category.name}
@@ -50,25 +51,21 @@ const CategoryList = ({ index, category }) => {
 			</div>
 
 			{/* Content Section */}
-			<div className="p-8 md:w-1/2 flex flex-col justify-center text-center md:text-left">
-				{/* Name */}
+			<div className="p-8 md:w-1/2 flex flex-col justify-center text-center md:text-left z-10">
 				<h3 className="text-3xl font-bold text-primary tracking-wide mb-3">
 					{category.name}
 				</h3>
 
-				{/* Pet count */}
 				<span className="inline-block text-sm bg-white/80 text-gray-700 px-4 py-1 rounded-full mb-4 font-medium shadow-sm">
 					{category.pet_count} Lovely Pets Available
 				</span>
 
-				{/* Description */}
 				<p className="text-gray-700 leading-relaxed mb-6">
 					{category.description?.length > 120
 						? category.description
 						: `${category.description} Explore a wide range of adorable ${category.name.toLowerCase()} looking for loving homes. Learn about their traits, care tips, and adoption details to find your perfect companion.`}
 				</p>
 
-				{/* Explore Button */}
 				<button
 					onClick={() => navigate(`/category/${category.id}`)}
 					className="btn btn-secondary rounded-full px-8 py-2 text-base flex items-center justify-center gap-2 mx-auto md:mx-0 shadow-md hover:shadow-lg hover:scale-105 transition-transform"

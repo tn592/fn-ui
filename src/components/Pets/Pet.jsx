@@ -76,7 +76,7 @@ const Pet = () => {
 							{pets.map((pet) => (
 								<SwiperSlide key={pet.id}>
 									<div className="p-2 h-full">
-										<div className="rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 bg-base-200">
+										<div>
 											<PetCard pet={pet} />
 										</div>
 									</div>

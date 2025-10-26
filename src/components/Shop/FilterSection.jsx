@@ -1,19 +1,21 @@
+import { FiSearch } from "react-icons/fi";
+
 const FilterSection = ({
 	categories,
 	selectedCategory,
 	handleCategoryChange,
 	searchQuery,
 	handleSearchQuery,
+	layout,
 }) => {
-	return (
-		<div className="mb-10 flex flex-col md:flex-row md:items-start justify-between gap-4">
-
-			<div className="bg-white/70 backdrop-blur-md px-4 py-3 rounded-2xl shadow-sm border border-pink-200 w-full md:w-64 hover:shadow-md transition duration-300">
+	if (layout === "side") {
+		return (
+			<div className="bg-white/70 backdrop-blur-sm px-4 py-3 rounded-2xl shadow-sm border border-pink-200 hover:shadow-md transition duration-300 sticky top-6">
 				<label className="block text-sm font-medium text-pink-600 mb-1">
 					Category
 				</label>
 				<select
-					className="w-full p-1 border border-pink-200 rounded-lg focus:ring-1 focus:ring-pink-300 text-sm"
+					className="w-full p-2 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 text-sm"
 					value={selectedCategory}
 					onChange={(e) => handleCategoryChange(e.target.value)}
 				>
@@ -25,21 +27,27 @@ const FilterSection = ({
 					))}
 				</select>
 			</div>
+		);
+	}
 
-			<div className="bg-white/70 backdrop-blur-md px-4 py-3 rounded-2xl shadow-sm border border-blue-200 w-full md:w-80 hover:shadow-md transition duration-300 md:self-start">
-				<label className="block text-sm font-medium text-blue-600 mb-1">
-					Search
+	if (layout === "searchOnly") {
+		return (
+			<div className="w-full">
+				<label className="relative flex items-center w-full bg-white/70 backdrop-blur-sm rounded-2xl shadow-sm border border-pink-200 hover:shadow-md transition duration-300">
+					<FiSearch className="absolute left-3 text-gray-400 text-lg" />
+					<input
+						type="search"
+						value={searchQuery}
+						onChange={(e) => handleSearchQuery(e.target.value)}
+						placeholder="Search pets..."
+						className="w-full pl-10 pr-3 py-2 rounded-2xl bg-transparent text-sm focus:outline-none"
+					/>
 				</label>
-				<input
-					type="text"
-					value={searchQuery}
-					onChange={(e) => handleSearchQuery(e.target.value)}
-					placeholder="Type pet name..."
-					className="w-full p-1 border border-blue-200 rounded-lg focus:ring-1 focus:ring-blue-300 text-sm"
-				/>
 			</div>
-		</div>
-	);
+		);
+	}
+
+	return null;
 };
 
 export default FilterSection;
