@@ -108,7 +108,11 @@ const Contact = () => {
 					/>
 					<button
 						type="submit"
-						className="btn btn-primary btn-lg w-full rounded-xl text-white"
+						className="btn btn-lg w-full rounded-xl 
+							bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-300
+							text-gray-800 font-semibold shadow-md transition-all duration-300
+							hover:scale-[1.02] hover:shadow-lg hover:from-pink-400 hover:via-purple-400 hover:to-indigo-400
+							active:scale-[0.98] border-none"
 					>
 						Send Message
 					</button>

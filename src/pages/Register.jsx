@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import useAuthContext from "../hooks/useAuthContext";
 import ErrorAlert from "../components/ErrorAlert";
 import { useState } from "react";
@@ -9,7 +9,6 @@ import pawPrint from "../assets/paw_print.png";
 const Register = () => {
 	const { registerUser, errorMsg } = useAuthContext();
 	const [successMsg, setSuccessMsg] = useState("");
-	const navigate = useNavigate();
 
 	const {
 		register,
@@ -24,7 +23,6 @@ const Register = () => {
 			const response = await registerUser(data);
 			if (response.success) {
 				setSuccessMsg(response.message);
-				// Redirect after a few seconds if you want
 				// setTimeout(() => navigate("/login"), 3000);
 			}
 		} catch (error) {
@@ -36,15 +34,17 @@ const Register = () => {
 		<>
 			<AuthNavbar />
 			<div
-				className="min-h-screen flex items-center justify-center px-4"
+				className="min-h-screen flex items-center justify-center px-4 py-16" // ⬅ added vertical padding
 				style={{
 					backgroundImage: `url(${pawPrint})`,
-					backgroundRepeat: "cover",
+					backgroundRepeat: "repeat",
 					backgroundPosition: "center",
 					backgroundSize: "350px",
+					backgroundColor: "rgba(255, 255, 255, 0.8)",
+					backgroundBlendMode: "overlay",
 				}}
 			>
-				<div className="w-full max-w-md bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg border border-gray-100 overflow-hidden relative transition-transform hover:scale-[1.02] duration-300">
+				<div className="mx-8 w-full max-w-md bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg border border-gray-100 overflow-hidden relative transition-transform hover:scale-[1.02] duration-300">
 					{/* Header */}
 					<div className="bg-gradient-to-r from-secondary to-primary text-white text-center py-6 px-6">
 						<h2 className="text-2xl font-bold tracking-tight">
