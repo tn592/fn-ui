@@ -31,7 +31,7 @@ const PetCard = ({ pet }) => {
 					{/* Price Section */}
 					<div className="flex items-center justify-center gap-1 mb-3">
 						<span className="text-pink-600 font-bold text-lg">
-							${pet.price || "100"}
+							${pet.price}
 						</span>
 						<span className="text-gray-400 text-xs font-medium">
 							USD
