@@ -35,10 +35,11 @@ const Login = () => {
         className="min-h-screen flex items-center justify-center px-4"
         style={{
           backgroundImage: `url(${pawPrint})`,
-          backgroundRepeat: "cover",
-          backgroundPosition: "center",
-          backgroundSize: "350px",
-          opacity: 1,
+					backgroundRepeat: "repeat",
+					backgroundPosition: "center",
+					backgroundSize: "350px",
+					backgroundColor: "rgba(255, 255, 255, 0.8)",
+					backgroundBlendMode: "overlay",
         }}
       >
         <div className="w-full max-w-md bg-white/90 backdrop-blur-xl rounded-3xl shadow-lg border border-gray-100 overflow-hidden relative transition-transform hover:scale-[1.02] duration-300">
